@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz do Universo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Fundo permanente -->
+    <div id="star-background"></div>
+
+    <!-- Planetas do sistema solar -->
+    <div class="planets">
+      <div class="planet mercury"></div>
+      <div class="planet venus"></div>
+      <div class="planet earth"></div>
+      <div class="planet mars"></div>
+      <div class="planet jupiter"></div>
+      <div class="planet saturn"></div>
+      <div class="planet uranus"></div>
+      <div class="planet neptune"></div>
+    </div>
+
+    <!-- TELA INICIAL -->
+    <div id="start-screen" class="screen">
+      <h1>🌌 Seja Bem-Vindo ao Quiz do Universo 🚀</h1>
+      <p>Teste seus conhecimentos sobre o espaço sideral!</p>
+      <button id="start-btn" class="btn">Iniciar</button>
+      <button id="translate-btn" class="btn">Traduzir</button>
+      <button id="info-btn" class="btn">Instruções</button>
+      <div id="instructions" class="hidden">
+        <p>
+          ✅ Escolha a alternativa correta.<br />
+          ✅ Clique em "Próxima" para avançar.<br />
+          ✅ Ao final, veja seu resultado!
+        </p>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz-container" class="hidden">
+      <h1>🌌 Quiz do Universo 🚀</h1>
+      <div id="question-container">
+        <h2 id="question">Carregando pergunta...</h2>
+        <div id="options"></div>
+      </div>
+      <button id="next-btn" class="btn">Próxima</button>
+      <div id="result"></div>
+      <canvas id="final-animation" class="hidden"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
