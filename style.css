@@ -1,12 +1,27 @@
-/* ===== RESET ===== */
+/* ===== IMPORT E VARIAVEIS ===== */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
+
+:root {
+  --color-dark: #0a0a1a;
+  --color-primary: #00f5ff; /* Cyan Neon */
+  --color-secondary: #0077ff; /* Azul Neon */
+  --color-correct: #32cd32; /* Lima Green */
+  --color-wrong: #ff4500; /* Red Orange */
+  --color-background: rgba(10, 10, 26, 0.95);
+  --shadow-neon: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+/* ===== RESET E BASE ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s,
+    box-shadow 0.3s;
 }
 body {
-  background: black;
+  background: var(--color-dark);
   color: white;
   display: flex;
   justify-content: center;
@@ -15,203 +30,130 @@ body {
   overflow: hidden;
 }
 
-/* ===== FUNDO DE ESTRELAS ===== */
+/* ===== FUNDO DE ESTRELAS (Melhorado) ===== */
 #star-background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: black;
   z-index: -3;
-  overflow: hidden;
+  background: black;
+  /* NOVO: Efeito de rolagem/viagem pelo espaço */
+  animation: starScroll 180s linear infinite;
 }
-
-/* Criando 200 estrelas no fundo com animação */
 .star {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 1px;
+  height: 1px;
   border-radius: 50%;
   background: white;
-  animation: twinkle 2s infinite alternate;
+  opacity: 0.5;
+  animation: twinkle 5s infinite alternate;
 }
-
 @keyframes twinkle {
   from {
     opacity: 0.2;
-    transform: scale(0.8);
   }
   to {
     opacity: 1;
-    transform: scale(1.3);
   }
 }
 
-/* ===== ESTRELAS CADENTES ===== */
-.meteor {
-  position: absolute;
-  width: 2px;
-  height: 50px;
-  background: linear-gradient(45deg, white, transparent);
-  opacity: 0.8;
-  transform: rotate(45deg);
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
+/* NOVO KEYFRAME: Faz as estrelas se moverem lentamente de baixo para cima */
+@keyframes starScroll {
   from {
-    transform: translate(-100px, -50px) rotate(45deg);
-    opacity: 0;
+    background-position: 0 0;
   }
   to {
-    transform: translate(120vw, 120vh) rotate(45deg);
-    opacity: 0;
+    background-position: 0 100%; /* Move o background verticalmente */
   }
 }
 
-/* ===== PLANETAS ===== */
-.planets {
+/* ===== PLANETAS (Aprimorado) ===== */
+.planets-bg {
   position: fixed;
   width: 100%;
   height: 100%;
   z-index: -2;
 }
 .planet {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  filter: blur(5px);
+  opacity: 0.25; /* Aumentei a opacidade para ficarem mais visíveis */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-/* Planetas com órbitas elípticas e cores */
-.mercury {
-  background: #b2b2b2;
-  animation: orbit 15s linear infinite;
-  transform-origin: -60px 0;
-}
-.venus {
-  background: #e6c97a;
-  animation: orbit 25s linear infinite;
-  transform-origin: -100px 0;
-}
 .earth {
   background: linear-gradient(135deg, #1e90ff, #00ff7f);
-  animation: orbit 35s linear infinite;
-  transform-origin: -140px 0;
+  animation: orbit-dynamic 80s linear infinite;
+  top: 10%;
+  left: 85%;
 }
 .mars {
   background: #ff4500;
-  animation: orbit 45s linear infinite;
-  transform-origin: -180px 0;
+  animation: orbit-dynamic 120s linear infinite reverse;
+  top: 70%;
+  left: 10%;
+  width: 60px;
+  height: 60px;
 }
 .jupiter {
   background: #d2a679;
-  animation: orbit 55s linear infinite;
-  transform-origin: -220px 0;
-}
-.saturn {
-  background: #f4d27a;
-  animation: orbit 65s linear infinite;
-  transform-origin: -260px 0;
-}
-.uranus {
-  background: #7fffd4;
-  animation: orbit 75s linear infinite;
-  transform-origin: -300px 0;
-}
-.neptune {
-  background: #4169e1;
-  animation: orbit 85s linear infinite;
-  transform-origin: -340px 0;
+  animation: orbit-dynamic 60s linear infinite;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
 }
 
-@keyframes orbit {
-  from {
-    transform: rotate(0deg) translateX(0px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(0px) rotate(-360deg);
-  }
-}
-
-/* ===== TELAS ===== */
-.screen,
-#quiz-container {
-  background: rgba(20, 20, 40, 0.85);
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  width: 450px;
-  max-width: 95%;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-  animation: fadeIn 1s ease-in-out;
-  position: relative;
-  z-index: 1;
-}
-.hidden {
-  display: none;
-}
-
-button {
-  padding: 12px 25px;
-  margin: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  background: linear-gradient(90deg, #00f5ff, #0077ff);
-  color: black;
-  font-weight: bold;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px #00f5ff;
-}
-
-.option {
-  display: block;
-  background: rgba(0, 255, 255, 0.2);
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.option:hover {
-  background: rgba(0, 255, 255, 0.5);
-}
-
-/* ===== FINAIS ===== */
-#final-animation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.rocket {
-  font-size: 50px;
-  animation: launch 2s ease-in-out forwards;
-}
-@keyframes launch {
+/* KEYFRAME MELHORADO: Combina órbita, zoom e rotação 3D para um efeito mais imersivo */
+@keyframes orbit-dynamic {
   0% {
-    transform: translateY(100px) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1) perspective(800px)
+      rotateY(0deg);
+  }
+  25% {
+    transform: translate(150px, -50px) rotate(90deg) scale(0.9)
+      perspective(800px) rotateY(45deg);
   }
   50% {
-    transform: translateY(-50px) rotate(10deg);
+    transform: translate(0, -100px) rotate(180deg) scale(1.1) perspective(800px)
+      rotateY(0deg);
+  }
+  75% {
+    transform: translate(-150px, 50px) rotate(270deg) scale(0.9)
+      perspective(800px) rotateY(-45deg);
   }
   100% {
-    transform: translateY(-300px) rotate(-10deg);
-    opacity: 0;
+    transform: translate(0, 0) rotate(360deg) scale(1) perspective(800px)
+      rotateY(0deg);
   }
 }
 
+/* ===== TELAS PRINCIPAIS (Mantidas) ===== */
+.screen {
+  background: var(--color-background);
+  border: 1px solid var(--color-primary);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4),
+    inset 0 0 10px var(--color-primary);
+  position: relative;
+  z-index: 10;
+}
+.hidden {
+  display: none !important;
+}
+.fadeIn {
+  animation: fadeIn 0.8s ease-in-out;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -220,5 +162,189 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* --- TELA INICIAL --- */
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px var(--color-primary);
+}
+.subtitle {
+  margin-bottom: 25px;
+}
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.instruction-box {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px dashed var(--color-secondary);
+  border-radius: 8px;
+  background: rgba(0, 119, 255, 0.1);
+}
+
+/* --- ESTILIZAÇÃO DE BOTÕES --- */
+.btn {
+  padding: 12px 25px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.btn.primary {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-dark);
+}
+.btn.primary:not(:disabled):hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--color-primary);
+}
+.btn.secondary {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+.btn.secondary:hover {
+  transform: scale(1.05);
+  background: rgba(0, 119, 255, 0.2);
+  box-shadow: 0 0 10px var(--color-secondary);
+}
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- QUIZ CONTAINER --- */
+.question-header {
+  font-size: 1.1em;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+.question-text {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* --- OPÇÕES DE RESPOSTA --- */
+.option {
+  padding: 15px;
+  border-radius: 8px;
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  cursor: pointer;
+  text-align: left;
+  font-size: 1em;
+}
+.option:hover {
+  background: rgba(0, 245, 255, 0.3);
+}
+
+/* Feedback de cores */
+.option.correct {
+  background: var(--color-correct);
+  border-color: var(--color-correct);
+  box-shadow: 0 0 10px var(--color-correct);
+  color: var(--color-dark);
+}
+.option.wrong {
+  background: var(--color-wrong);
+  border-color: var(--color-wrong);
+  box-shadow: 0 0 10px var(--color-wrong);
+}
+.option.disabled {
+  pointer-events: none;
+}
+
+/* --- BARRA DE PROGRESSO --- */
+#progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffaa, var(--color-primary));
+  transition: width 0.5s ease-out;
+}
+
+/* --- TELA DE RESULTADO --- */
+#result-screen {
+  padding: 30px 10px;
+  font-size: 1.3em;
+  line-height: 1.6;
+}
+.result-message {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 15px 0;
+  text-shadow: 0 0 5px var(--color-primary);
+}
+.result-emoji {
+  font-size: 3em;
+  display: block;
+  margin: 20px 0;
+}
+.restart-btn-group {
+  margin-top: 30px;
+}
+
+/* Animação do foguete (mantida do código anterior) */
+.rocket {
+  font-size: 3em;
+  position: absolute;
+  animation: launch 2s ease-in-out forwards;
+  z-index: 100;
+}
+@keyframes launch {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-150px) scale(1.2) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+  .screen {
+    padding: 20px;
+  }
+  .title {
+    font-size: 1.5em;
+  }
+  .question-text {
+    font-size: 1.2em;
+  }
+  .options-grid {
+    gap: 10px;
   }
 }

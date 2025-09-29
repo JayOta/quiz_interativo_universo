@@ -5,49 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz do Universo</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Fundo permanente -->
     <div id="star-background"></div>
 
-    <!-- Planetas do sistema solar -->
-    <div class="planets">
-      <div class="planet mercury"></div>
-      <div class="planet venus"></div>
-      <div class="planet earth"></div>
-      <div class="planet mars"></div>
-      <div class="planet jupiter"></div>
-      <div class="planet saturn"></div>
-      <div class="planet uranus"></div>
-      <div class="planet neptune"></div>
-    </div>
+    <div id="start-screen" class="screen fadeIn">
+      <h1 class="title">🌌 Quiz do Universo 🚀</h1>
+      <p class="subtitle">Teste seus conhecimentos sobre o espaço sideral!</p>
 
-    <!-- TELA INICIAL -->
-    <div id="start-screen" class="screen">
-      <h1>🌌 Seja Bem-Vindo ao Quiz do Universo 🚀</h1>
-      <p>Teste seus conhecimentos sobre o espaço sideral!</p>
-      <button id="start-btn" class="btn">Iniciar</button>
-      <button id="translate-btn" class="btn">Traduzir</button>
-      <button id="info-btn" class="btn">Instruções</button>
-      <div id="instructions" class="hidden">
+      <div class="button-group">
+        <button id="start-btn" class="btn primary">Iniciar</button>
+        <button id="translate-btn" class="btn secondary">Traduzir (EN)</button>
+        <button id="info-btn" class="btn secondary">Instruções</button>
+      </div>
+
+      <div id="instructions" class="instruction-box hidden">
         <p>
-          ✅ Escolha a alternativa correta.<br />
-          ✅ Clique em "Próxima" para avançar.<br />
-          ✅ Ao final, veja seu resultado!
+          ✅ Escolha a alternativa correta.<br />✅ Clique em "Próxima" para
+          avançar.<br />✅ Ao final, veja sua patente de astronauta!
         </p>
       </div>
     </div>
 
-    <!-- QUIZ -->
-    <div id="quiz-container" class="hidden">
-      <h1>🌌 Quiz do Universo 🚀</h1>
-      <div id="question-container">
-        <h2 id="question">Carregando pergunta...</h2>
-        <div id="options"></div>
+    <div id="quiz-container" class="screen hidden">
+      <div id="progress-bar">
+        <div id="progress-fill"></div>
       </div>
-      <button id="next-btn" class="btn">Próxima</button>
-      <div id="result"></div>
-      <canvas id="final-animation" class="hidden"></canvas>
+
+      <h2 id="question-number" class="question-header">Pergunta 1/4</h2>
+
+      <div id="question-container">
+        <p id="question" class="question-text">Carregando pergunta...</p>
+        <div id="options" class="options-grid"></div>
+      </div>
+
+      <button id="next-btn" class="btn primary disabled" disabled>
+        Próxima
+      </button>
+
+      <div id="result-screen" class="hidden"></div>
+    </div>
+
+    <div class="planets-bg">
+      <div class="planet earth"></div>
+      <div class="planet mars"></div>
+      <div class="planet jupiter"></div>
     </div>
 
     <script src="script.js"></script>
